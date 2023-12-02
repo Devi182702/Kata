@@ -27,6 +27,7 @@ namespace Kata.Implementations
             return currentOrder;
             
         }
+
         public float ApplyPromotions(int itemId, int quantity, float unitPrice)
         {
             float netAmount = 0;
@@ -58,6 +59,17 @@ namespace Kata.Implementations
                 }
             }
             return netAmount;
+        }
+
+        public void UpdateOrder(Order existingOrder, int itemId, int quantity)
+        {
+
+            Item itemObj = itemService.GetItem(itemId);
+            int newQuantity = existingOrder.Quantity + quantity;
+            //float totalPrice = newQuantity * itemObj.UnitPrice;
+            float totalPrice = ApplyPromotions(itemId, newQuantity, itemObj.UnitPrice);
+            existingOrder.TotalPrice = totalPrice;
+            existingOrder.Quantity = newQuantity;
         }
     }
 }

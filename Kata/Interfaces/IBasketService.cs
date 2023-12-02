@@ -10,5 +10,6 @@ namespace Kata.Interfaces
     {
         IList<Order> AddToBasket(int itemId, int quantity);
         IList<Order> ViewBasket();
+        float GetTotalBasketPrice();
     }
 }

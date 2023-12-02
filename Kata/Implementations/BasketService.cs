@@ -16,14 +16,36 @@ namespace Kata.Implementations
         }
         IList<Order> basket = new List<Order>();
         public IList<Order> AddToBasket(int itemId, int quantity)
-        {            
-            Order orderObj = orderService.CreateOrder(itemId, quantity);
-            basket.Add(orderObj);
-            return basket;
+        {
+            try
+            {
+                Order existingOrder = basket.FirstOrDefault(eachOrder => eachOrder.ItemId == itemId);
+                if (existingOrder == null)
+                {
+                    Order orderObj = orderService.CreateOrder(itemId, quantity);
+                    basket.Add(orderObj);                   
+                }
+                else
+                {
+                    orderService.UpdateOrder(existingOrder, itemId, quantity);
+                }
+                return basket;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+            
         }
         public IList<Order> ViewBasket()
         {
             return this.basket;
+        }
+
+        public float GetTotalBasketPrice()
+        {
+            return basket.Sum(order => order.TotalPrice);
+
         }
     }
 }

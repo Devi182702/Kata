@@ -37,6 +37,7 @@ namespace Kata.Controllers
         {
 
             IList<Order> basketItems = basketService.ViewBasket();
+            ViewBag.TotalBasketPrice = basketService.GetTotalBasketPrice();
             return View("Basket", basketItems);
         }
     }

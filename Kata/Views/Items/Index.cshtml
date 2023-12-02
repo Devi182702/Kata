@@ -6,17 +6,12 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 @using (Html.BeginForm())
 {
 <table class="table">
     <thead>
-        <tr>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.ItemId)
-                </th>*@
+        <tr>           
             <th>
                 @Html.DisplayNameFor(model => model.ItemName)
             </th>
@@ -39,14 +34,11 @@
                         @Html.HiddenFor(modelItem => @item.ItemId)
                         @Html.DisplayFor(modelItem => @item.ItemName)
                     </td>
-                    @*<td id="ItemName">@item.ItemName</td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.UnitPrice)
-                    </td>
-                    @*<td id="UnitPrice">@item.UnitPrice</td>*@
+                    </td>                  
                     <td><input type="text" id="@i" /></td>
-                    <td> <input type="button" value="Add to cart" onclick="callChangefunc(@i)" /></td>
-                    @*<td> <input type="submit" class="btn btn-default" value="Add to cart" /></td>*@
+                    <td> <input type="button" value="Add to cart" onclick="callChangefunc(@i)" /></td>                 
                 </tr>
                 i++;
             }
@@ -57,14 +49,11 @@
 
 @section Scripts{
     <script>
-    function callChangefunc(val) {
-        alert(val);
-        alert(document.getElementById(val).value);
+    function callChangefunc(val) {  
         var data = {
             "ItemId": val,
             "SelectedQuantity": document.getElementById(val).value
-        }
-        alert(JSON.stringify(data));
+        }        
         $.ajax({
             type: "POST",
             url: "/Items/AddToCart",
@@ -79,8 +68,7 @@
                 console.log("failure");
                 window.location.href = '/Items/ViewBasket'
             }
-        })
-       // alert(document.getElementById('SelectedQuantity').value);
+        })       
     }
     </script>
 }
