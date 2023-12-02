@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Kata.Models
+﻿namespace Kata.Models
 {
     public class Item
     {

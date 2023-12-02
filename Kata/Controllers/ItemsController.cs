@@ -1,12 +1,7 @@
-﻿using Kata.Implementations;
-using Kata.Interfaces;
+﻿using Kata.Interfaces;
 using Kata.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Kata.Controllers
 {
@@ -14,6 +9,8 @@ namespace Kata.Controllers
     {
         IItemService itemService;
         IBasketService basketService;
+
+        //Using Dependency Injection
         public ItemsController(IItemService itemService, IBasketService basketService)
         {
             this.itemService = itemService;

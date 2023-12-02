@@ -9,66 +9,66 @@
 
 @using (Html.BeginForm())
 {
-<table class="table">
-    <thead>
-        <tr>           
-            <th>
-                @Html.DisplayNameFor(model => model.ItemName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SelectedQuantity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @{ var i = 1;
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td id="ItemId" hidden>@item.ItemId</td>
-                    <td>
-                        @Html.HiddenFor(modelItem => @item.ItemId)
-                        @Html.DisplayFor(modelItem => @item.ItemName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UnitPrice)
-                    </td>                  
-                    <td><input type="text" id="@i" /></td>
-                    <td> <input type="button" value="Add to cart" onclick="callChangefunc(@i)" /></td>                 
-                </tr>
-                i++;
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ItemName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SelectedQuantity)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ var i = 1;
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td id="ItemId" hidden>@item.ItemId</td>
+                        <td>
+                            @Html.HiddenFor(modelItem => @item.ItemId)
+                            @Html.DisplayFor(modelItem => @item.ItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                        </td>
+                        <td><input type="text" id="@i" /></td>
+                        <td> <input type="button" value="Add to cart" onclick="callChangefunc(@i)" /></td>
+                    </tr>
+                    i++;
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 }
 
 @section Scripts{
     <script>
-    function callChangefunc(val) {  
-        var data = {
-            "ItemId": val,
-            "SelectedQuantity": document.getElementById(val).value
-        }        
-        $.ajax({
-            type: "POST",
-            url: "/Items/AddToCart",
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify(data),
-            sucess: function (data) {
-                console.log("success");
-                window.location.href = '/Items/ViewBasket'
-            },
-            error: function (err) {
-                console.log("failure");
-                window.location.href = '/Items/ViewBasket'
+        function callChangefunc(val) {
+            var data = {
+                "ItemId": val,
+                "SelectedQuantity": document.getElementById(val).value
             }
-        })       
-    }
+            $.ajax({
+                type: "POST",
+                url: "/Items/AddToCart",
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(data),
+                sucess: function (data) {
+                    console.log("success");
+                    window.location.href = '/Items/ViewBasket'
+                },
+                error: function (err) {
+                    console.log("failure");
+                    window.location.href = '/Items/ViewBasket'
+                }
+            })
+        }
     </script>
 }

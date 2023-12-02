@@ -1,16 +1,14 @@
 ﻿using Kata.Interfaces;
 using Kata.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Kata.Implementations
 {
     public class OrderService : IOrderService
     {
         IItemService itemService;
-       
+        //Using Dependency Injection
         public OrderService(IItemService itemService)
         {
             this.itemService = itemService;          
@@ -31,6 +29,7 @@ namespace Kata.Implementations
         public float ApplyPromotions(int itemId, int quantity, float unitPrice)
         {
             float netAmount = 0;
+            //This list will have items that has some kind of offer 
             IList<Promotions> promotionList = new List<Promotions>()
             {
                 new Promotions(){ ItemId = 2, MinimumQuantity = 3, DiscountPerc = 0, OfferPrice = 40},

@@ -3,13 +3,13 @@ using Kata.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Kata.Implementations
 {
     public class BasketService : IBasketService
     {
         IOrderService orderService;
+        //Using Dependency Injection
         public BasketService(IOrderService orderService)
         {
             this.orderService = orderService;

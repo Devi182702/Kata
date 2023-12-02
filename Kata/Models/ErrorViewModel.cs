@@ -1,5 +1,3 @@
-using System;
-
 namespace Kata.Models
 {
     public class ErrorViewModel
