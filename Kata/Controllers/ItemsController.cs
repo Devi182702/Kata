@@ -18,21 +18,25 @@ namespace Kata.Controllers
         }
 
         // GET: ItemsController
-        public ActionResult Index()
+        public ViewResult Index()
         {
-            IList<Item> stockItems = this.itemService.GetItems();
+            IList<Item> stockItems = this.itemService.GetItems();            
             return View(stockItems);
         }
 
         [HttpPost]
-        public ActionResult AddToCart([FromBody] Item selectedItem)
+        public JsonResult AddToCart([FromBody] Item selectedItem)
         {
             IList<Order> basketItems = basketService.AddToBasket(selectedItem.ItemId, selectedItem.SelectedQuantity);
-            return View("Basket", basketItems);
-        }
-        public ActionResult ViewBasket()
-        {
+            //return View("Basket", basketItems);
+            if (basketItems.Count >= 1)
+                return Json(new { message = "Saved Successfully!" });
+            else
+                return Json(new { message = "Some Error Ocurred" });
 
+        }
+        public ViewResult ViewBasket()
+        {
             IList<Order> basketItems = basketService.ViewBasket();
             ViewBag.TotalBasketPrice = basketService.GetTotalBasketPrice();
             return View("Basket", basketItems);

@@ -1,4 +1,6 @@
-﻿namespace Kata.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Kata.Models
 {
     public class Item
     {
@@ -22,6 +24,7 @@
             get { return unitPrice; }
             set { unitPrice = value; }
         }
+        [Range(1,10)]
         public int SelectedQuantity
         {
             get { return selectedQuantity; }

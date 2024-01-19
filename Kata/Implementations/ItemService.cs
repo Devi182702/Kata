@@ -10,7 +10,7 @@ namespace Kata.Implementations
     {
         public Item GetItem(int itemId)
         {
-            return GetItems().FirstOrDefault(eachItem => eachItem.ItemId == itemId);
+            return GetItems().FirstOrDefault(eachItem => eachItem.ItemId == itemId);     
         }
 
         public float GetItemPrice(int itemId)
@@ -27,6 +27,7 @@ namespace Kata.Implementations
                 new Item(){ ItemId = 3, ItemName="ITEM C", UnitPrice = 40},
                 new Item(){ ItemId = 4, ItemName="ITEM D", UnitPrice = 55}
             };
+
             return items;            
         }
     }
